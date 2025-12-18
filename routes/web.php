@@ -1,28 +1,33 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HelloController;
+use App\Http\Controllers\StudentController;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Hello Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('/hello', [HelloController::class, 'hello']);
+Route::get('/hello-view', [HelloController::class, 'view']);
+Route::get('/hello-data', [HelloController::class, 'data']);
 
-Route::get('/hello', function(){
-    return "Hello Laravel 11";
-});
 
-Route::get('/hello-view', function(){
-    return view('hello');
-});
+/*
+Student Routes
+*/
+// 목록
+Route::get('/students', [StudentController::class, 'index']);
 
+//create는 {id}보다 위에!
+Route::get('/students/create', [StudentController::class, 'create']);
+Route::post('/students', [StudentController::class, 'store']);
 
-Route::get('/hello-data', function(){
-    return view('hello', [
-        'school' => '경기과학고',
-        'year' => 2025,
-    ]);
-});
-
-Route::get('/students/{id}', function ($id) {
-    return "학생 ID: {$id}";
-})->whereNumber('id');
+// 상세 (가장 아래)
+Route::get('/students/{id}', [StudentController::class, 'show']);

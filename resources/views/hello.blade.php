@@ -1,5 +1,8 @@
-<h1>Hello View</h1>
-<p>Route → View 연습</p>
+@extends('layouts.app')
 
-<h1>{{ $school }}</h1>
-<h1>{{ $year }} Laravel Study</h1>
+@section('title', 'Hello')
+
+@section('content')
+    <h2>Hello View</h2>
+    <p>Blade Layout 연습</p>
+@endsection
